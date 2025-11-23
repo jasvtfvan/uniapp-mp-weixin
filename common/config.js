@@ -8,11 +8,11 @@ if (__wxConfig) { // 微信小程序
   const envVersion = __wxConfig.envVersion;
   if (envVersion != 'release') {
     // ------开发环境--------
-    base_url = 'https://xxx.uat.77qiku.com/';
+    base_url = 'https://xxx.uat.daily.com/';
     isWxDev = true;
   } else {
     // ------生产环境--------
-    base_url = 'https://xxx.77qiku.com/';
+    base_url = 'https://xxx.daily.com/';
     isWxDev = false;
   }
 }
