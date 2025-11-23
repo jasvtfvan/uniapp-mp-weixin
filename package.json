@@ -1,0 +1,19 @@
+{
+  "name": "uniapp-mp-weixin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "uni-read-pages": "^1.0.5",
+    "uni-simple-router": "^2.0.8-beta.4",
+    "uview-ui": "^2.0.38",
+    "vuex-persistedstate": "^4.1.0"
+  }
+}
