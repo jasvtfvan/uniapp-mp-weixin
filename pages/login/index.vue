@@ -9,7 +9,7 @@
           <u--input placeholder="请输入密码" password border="surround" v-model="password"></u--input>
         </view>
         <view class="form-item">
-          <g-button @click="login">登录</g-button>
+          <ci-button @click="login">登录</ci-button>
         </view>
       </view>
     </view>
@@ -22,8 +22,12 @@
 <script>
 import { version } from '@/common/config';
 import { INDEX_ROUTE_MAP } from '@/common/constant.js';
+import CiButton from '@/components/ui-component/ci-button/index.vue';
 
 export default {
+  components: {
+    CiButton,
+  },
   data() {
     return {
       version,

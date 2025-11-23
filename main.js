@@ -14,12 +14,11 @@ import uView from "uview-ui";
 import filters from './common/filters.js';
 
 // 全局组件begin
-import GNav from '@/components/g-nav/index.vue';
-import GBackButton from '@/components/g-back-button/index.vue';
-import GTabBar from '@/components/g-tab-bar/index.vue';
-import GImageIcon from '@/components/g-image-icon/index.vue';
-import GContainer from '@/components/g-container/index.vue';
-import GButton from '@/components/g-button/index.vue';
+import GNav from '@/components/global-component/g-nav/index.vue';
+import GBackButton from '@/components/global-component/g-back-button/index.vue';
+import GTabBar from '@/components/global-component/g-tab-bar/index.vue';
+import GImageIcon from '@/components/global-component/g-image-icon/index.vue';
+import GContainer from '@/components/global-component/g-container/index.vue';
 // 全局组件end
 
 // 全局方法
@@ -41,7 +40,6 @@ Vue.component('g-back-button', GBackButton);
 Vue.component('g-tab-bar', GTabBar);
 Vue.component('g-image-icon', GImageIcon);
 Vue.component('g-container', GContainer);
-Vue.component('g-button', GButton);
 // 全局组件end
 
 // #ifdef MP

@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import CiToast from '@/components/ci-toast/index.vue';
-import CiLoading from '@/components/ci-loading/index.vue';
-import CiDebugPanel from '@/components/ci-debug-panel/index.vue';
+import CiToast from '@/components/ui-component/ci-toast/index.vue';
+import CiLoading from '@/components/ui-component/ci-loading/index.vue';
+import CiDebugPanel from '@/components/ui-component/ci-debug-panel/index.vue';
 export default {
   components: {
     CiToast,
