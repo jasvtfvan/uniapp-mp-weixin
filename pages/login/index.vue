@@ -2,23 +2,33 @@
   <g-container>
     <view class="body">
       <view class="form">
-        <view class="form_cell">
-          <u--input placeholder="经销商授权码" v-model="dealerRandomCode"></u--input>
-          <u-icon name="scan" @click="doScan" size="64rpx"></u-icon>
+        <view class="form-item">
+          <u--input placeholder="请输入姓名" border="surround" v-model="username"></u--input>
         </view>
-        <view @click="signIn" class="login_btn">欢迎使用</view>
+        <view class="form-item">
+          <u--input placeholder="请输入密码" password border="surround" v-model="password"></u--input>
+        </view>
+        <view class="form-item">
+          <g-button @click="login">登录</g-button>
+        </view>
       </view>
     </view>
+		<view class="footer">
+			<text>V{{ version }}</text>
+		</view>
   </g-container>
 </template>
 
 <script>
+import { version } from '@/common/config';
 import { INDEX_ROUTE_MAP } from '@/common/constant.js';
 
 export default {
   data() {
     return {
-      dealerRandomCode: '',
+      version,
+      username: '',
+      password: '',
     };
   },
   onLoad(option) {
@@ -32,31 +42,30 @@ export default {
     this.params = { ...option };
   },
   methods: {
-    doScan() {
+    login() {
       let that = this;
-      uni.scanCode({
-        success: function (res) {
-          that.dealerRandomCode = res.result;
-        },
-      });
-    },
-    signIn() {
-      let that = this;
-      // 4108641199852617728
-      const dealerRandomCode = that.dealerRandomCode;
-      if (!dealerRandomCode) {
+      const username = that.username;
+      const password = that.password;
+      if (!username) {
         uni.showToast({
-          title: '授权码不可为空',
+          title: '姓名不可为空',
           icon: 'none',
         });
         return false;
       }
-      this.loginBySession(dealerRandomCode);
+      if (!password) {
+        uni.showToast({
+          title: '密码不可为空',
+          icon: 'none',
+        });
+        return false;
+      }
+      this.loginBySession({ username, password });
     },
-    loginBySession(dealerRandomCode) {
+    loginBySession(data) {
       const sessionKey = this.$store.getters.sessionKey;
       this.$store
-        .dispatch('token/LoginBySession', { sessionKey, dealerRandomCode })
+        .dispatch('token/LoginBySession', { sessionKey, ...data })
         .then(() => {
           this.loadBasicData();
           this.loadUserInfo();
@@ -125,71 +134,37 @@ export default {
 
 <style lang="scss">
 .body {
-  // background-repeat: no-repeat;
-  // background-size: 100%;
-  // background-position: top;
-  background: linear-gradient(to bottom, #050504, #050504, #000000);
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow-y: auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .form {
   position: absolute;
-  top: 998rpx;
-  left: 40rpx;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .form-item {
+    margin: 20rpx 0rpx;
+  }
 }
 
-.form_cell {
-  width: 670rpx;
-  height: 88rpx;
-  background: #ffffff #111111;
-  border: 2rpx solid #404040;
-  box-sizing: border-box;
-  margin-bottom: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30rpx;
-}
+.footer {
+	position: absolute;
+	bottom: 100rpx;
+	width: 100%;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-.form_cell input {
-  font-size: 32rpx !important;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400 !important;
-  color: #808080 !important;
-  line-height: 28rpx !important;
-}
-
-.form_cell_right {
-  font-size: 28rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #00adef;
-  line-height: 40rpx;
-  border-left: 2rpx solid rgba(255, 255, 255, 0.3);
-  box-sizing: border-box;
-  padding-left: 30rpx;
-}
-
-.login_btn {
-  margin-top: 80rpx;
-  width: 670rpx;
-  height: 100rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #ffffff;
-  line-height: 46rpx;
-  background-color: #00adef;
-}
-
-.u-icon {
-  position: relative;
-  right: -10rpx;
+	text {
+		font-size: 26rpx;
+		font-weight: 400;
+		color: #7f7f7f;
+	}
 }
 </style>

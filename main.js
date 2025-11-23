@@ -15,6 +15,7 @@ import filters from './common/filters.js';
 
 // 全局组件begin
 import GNav from '@/components/g-nav/index.vue';
+import GBackButton from '@/components/g-back-button/index.vue';
 import GTabBar from '@/components/g-tab-bar/index.vue';
 import GImageIcon from '@/components/g-image-icon/index.vue';
 import GContainer from '@/components/g-container/index.vue';
@@ -36,6 +37,7 @@ Object.keys(filters).map(v => {
 });
 // 全局组件begin
 Vue.component('g-nav', GNav);
+Vue.component('g-back-button', GBackButton);
 Vue.component('g-tab-bar', GTabBar);
 Vue.component('g-image-icon', GImageIcon);
 Vue.component('g-container', GContainer);
@@ -54,5 +56,5 @@ Vue.prototype.$navigateSmoothTo = navigateSmoothTo;
 const app = new Vue({
   store,
   ...App
-})
-app.$mount()
+});
+app.$mount();

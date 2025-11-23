@@ -1,5 +1,5 @@
 <template>
-  <view class="g-loading">
+  <view class="ci-loading">
     <u-loading-icon size="48rpx"></u-loading-icon>
   </view>
 </template>
@@ -14,7 +14,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.g-loading {
+.ci-loading {
   position: absolute;
   top: 50%;
   left: 50%;

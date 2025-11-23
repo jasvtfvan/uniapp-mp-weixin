@@ -18,24 +18,24 @@
     @refresherabort="refresherAbort"
     @click="click"
   >
-    <debug-panel />
+    <ci-debug-panel />
     <slot />
-    <g-toast />
+    <ci-toast />
     <view class="loading-wrap" v-if="loading">
-      <g-loading />
+      <ci-loading />
     </view>
   </scroll-view>
 </template>
 
 <script>
-import GToast from '@/components/g-toast/index.vue';
-import GLoading from '@/components/g-loading/index.vue';
-import DebugPanel from '@/components/debug-panel/index.vue';
+import CiToast from '@/components/ci-toast/index.vue';
+import CiLoading from '@/components/ci-loading/index.vue';
+import CiDebugPanel from '@/components/ci-debug-panel/index.vue';
 export default {
   components: {
-    GToast,
-    GLoading,
-    DebugPanel,
+    CiToast,
+    CiLoading,
+    CiDebugPanel,
   },
   props: {
     borderTopColor: {
