@@ -24,9 +24,7 @@ export default {
     return {};
   },
   onLoad() { },
-  onShow() {
-    this.$store.dispatch('navTabBar/SetTabBarIndex', 2);
-  },
+  onShow() { },
   methods: {
     doLogout() {
       this.$store.dispatch('user/Logout').then(() => {
@@ -46,6 +44,7 @@ export default {
   .img-wrap {
     display: flex;
     justify-content: center;
+
     .welcome-image {
       width: 642rpx;
       height: 336rpx;

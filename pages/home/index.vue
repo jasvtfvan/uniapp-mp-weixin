@@ -14,9 +14,7 @@ export default {
       height: null,
     };
   },
-  onShow() {
-    this.$store.dispatch('navTabBar/SetTabBarIndex', 1);
-  },
+  onShow() { },
   computed: {
     navHeight() {
       return this.$store.getters.navHeight || 0;

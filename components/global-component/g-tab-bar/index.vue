@@ -1,71 +1,53 @@
 <template>
   <view>
-    <view
-      class="g-tabbar-placeholder"
-      :style="{
-        height: placeholderHeight + 'px',
-      }"
-    ></view>
+    <view class="g-tabbar-placeholder" :style="{height: placeholderHeight + 'px'}"></view>
+  
     <view class="g-tabbar-tabbar-bg-wrap">
-      <image
-        class="g-tabbar-tabbar-bg"
-        src="/static/images/common/tabbar-bg.png"
-      ></image>
+      <image class="g-tabbar-tabbar-bg" src="/static/images/common/tabbar-bg.png"></image>
       <view class="u-safe-bottom u-safe-area-inset-bottom"></view>
     </view>
-    <u-tabbar :placeholder="false" :value="index">
-      <u-tabbar-item @click="clickPaper" text=" ">
+  
+    <u-tabbar :placeholder="false" :value="currentIndex">
+  
+      <u-tabbar-item v-for="(item, index) in list" :key="index" @click="triggerSwitchTab(index, item.pagePath)">
         <view class="g-tabbar-item-wrap" slot="active-icon">
-          <view class="g-tabbar-icon-wrap">
-            <g-image-icon name="tabbar-paper-active" />
+          <view :class="item.large ? 'g-tabbar-icon-wrap-large' : 'g-tabbar-icon-wrap'">
+            <g-image-icon :name="item.activeIcon" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-active">列表</text>
+          <text class="g-tabbar-item-font g-tabbar-active">{{item.text}}</text>
         </view>
         <view class="g-tabbar-item-wrap" slot="inactive-icon">
-          <view class="g-tabbar-icon-wrap">
-            <g-image-icon name="tabbar-paper-inactive" />
+          <view :class="item.large ? 'g-tabbar-icon-wrap-large' : 'g-tabbar-icon-wrap'">
+            <g-image-icon :name="item.inactiveIcon" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-inactive">列表</text>
+          <text class="g-tabbar-item-font g-tabbar-inactive">{{item.text}}</text>
         </view>
       </u-tabbar-item>
-      <u-tabbar-item @click="clickHome" text=" ">
-        <view class="g-tabbar-item-wrap g-tabbar-home" slot="active-icon">
-          <view class="g-tabbar-icon-wrap-large">
-            <g-image-icon name="tabbar-home-active" />
-          </view>
-          <text class="g-tabbar-item-font g-tabbar-active">拍照</text>
-        </view>
-        <view class="g-tabbar-item-wrap g-tabbar-home" slot="inactive-icon">
-          <view class="g-tabbar-icon-wrap-large">
-            <g-image-icon name="tabbar-home-inactive" />
-          </view>
-          <text class="g-tabbar-item-font g-tabbar-inactive">拍照</text>
-        </view>
-      </u-tabbar-item>
-      <u-tabbar-item @click="clickMine" text=" ">
-        <view class="g-tabbar-item-wrap" slot="active-icon">
-          <view class="g-tabbar-icon-wrap">
-            <g-image-icon name="tabbar-mine-active" />
-          </view>
-          <text class="g-tabbar-item-font g-tabbar-active">我的</text>
-        </view>
-        <view class="g-tabbar-item-wrap" slot="inactive-icon">
-          <view class="g-tabbar-icon-wrap">
-            <g-image-icon name="tabbar-mine-inactive" />
-          </view>
-          <text class="g-tabbar-item-font g-tabbar-inactive">我的</text>
-        </view>
-      </u-tabbar-item>
+  
     </u-tabbar>
   </view>
 </template>
 
 <script>
+const targetList = TABBAR_PAGES.map(item => {
+  const activeIcon = item.selectedIconPath.replace(/^.*\//, '').replace(/^icon-/, '').replace(/\.\w+$/, '');
+  const inactiveIcon = item.iconPath.replace(/^.*\//, '').replace(/^icon-/, '').replace(/\.\w+$/, '');
+  const large = !!item.large;
+  return {
+    activeIcon,
+    inactiveIcon,
+    text: item.text,
+    pagePath: item.pagePath,
+    large: large,
+  };
+})
+
 export default {
   props: {},
   data() {
     return {
-      index: -1,
+      list: targetList,
+      currentIndex: -1,
       placeholderHeight: 0,
     };
   },
@@ -80,7 +62,7 @@ export default {
   watch: {
     tabBarIndex: {
       handler(val) {
-        this.index = val == null ? -1 : val;
+        this.currentIndex = val == null ? -1 : val;
       },
       immediate: true,
     },
@@ -104,24 +86,17 @@ export default {
         this.$store.dispatch('navTabBar/SetTabBarHeight', height);
       });
     },
-    clickPaper() {
+    triggerSwitchTab(index, pagePath) {
       if (this.$store.getters.token) {
-        const targetPath = 'pages/paper/index';
-        this.$navigateSmoothTo(targetPath);
+        this.$navigateSmoothTo(`${pagePath}`)
+          .then(() => {
+            this.$store.dispatch('navTabBar/SetTabBarIndex', index);
+          });
       } else {
-        this.$navigateSmoothTo(`/pages/index/index`);
-      }
-    },
-    clickHome() {
-      const targetPath = 'pages/home/index';
-      this.$navigateSmoothTo(targetPath);
-    },
-    clickMine() {
-      if (this.$store.getters.token) {
-        const targetPath = 'pages/mine/index';
-        this.$navigateSmoothTo(targetPath);
-      } else {
-        this.$navigateSmoothTo(`/pages/index/index`);
+        this.$navigateSmoothTo(`/pages/index/index`)
+          .then(() => {
+            this.$store.dispatch('navTabBar/SetTabBarIndex', -1);
+          })
       }
     },
   },
@@ -135,40 +110,49 @@ export default {
   left: 0;
   right: 0;
   z-index: 1;
+
   .g-tabbar-tabbar-bg {
     width: 100%;
     height: 78px;
   }
 }
+
 .g-tabbar-icon-wrap {
   width: 26px;
   height: 26px;
 }
+
 .g-tabbar-icon-wrap-large {
   width: 44.5px;
   height: 44.5px;
 }
+
 .g-tabbar-placeholder {
   background: transparent;
 }
+
 .g-tabbar-item-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+
   &.g-tabbar-home {
     position: relative;
     top: -13.75px;
   }
+
   .g-tabbar-item-font {
     margin-top: 2px;
     font-size: 12px;
     color: #3a3e47;
+
     &.g-tabbar-active {
       color: #9ebaca;
     }
   }
+
   .badge-wrap {
     position: absolute;
     top: -20rpx;

@@ -22,9 +22,7 @@ export default {
     return {};
   },
   onLoad() { },
-  onShow() {
-    this.$store.dispatch('navTabBar/SetTabBarIndex', 0);
-  },
+  onShow() { },
   methods: {
   },
 };
@@ -34,6 +32,7 @@ export default {
 .nav-wrap {
   color: #FFFFFF;
 }
+
 .content {
   padding: 70rpx 0rpx 35rpx 0rpx;
   position: relative;
@@ -41,6 +40,7 @@ export default {
   .img-wrap {
     display: flex;
     justify-content: center;
+
     .welcome-image {
       width: 642rpx;
       height: 336rpx;

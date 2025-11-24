@@ -17,7 +17,7 @@ if (__wxConfig) { // 微信小程序
   }
 }
 
-const version = '0.1.0';
+const version = '1.0.0';
 
 export default base_url;
 export {

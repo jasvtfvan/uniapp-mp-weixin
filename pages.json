@@ -53,6 +53,7 @@
     }
   ],
   "tabBar": {
+  	"custom": true,
     "color": "#C2C2C2",
     "selectedColor": "#41AAFB",
     "borderStyle": "black",
@@ -68,7 +69,8 @@
         "pagePath": "pages/home/index",
         "iconPath": "static/icons/icon-tabbar-home-inactive.png",
         "selectedIconPath": "static/icons/icon-tabbar-home-active.png",
-        "text": "拍照"
+        "text": "拍照",
+        "large": true
       },
       {
         "pagePath": "pages/mine/index",

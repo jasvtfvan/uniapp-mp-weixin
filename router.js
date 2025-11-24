@@ -25,8 +25,18 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
+const formatPath = p => (p.startsWith('/') ? p : '/' + p);
+const cleanPath = url => url.split('?')[0];
 // 全局路由后置守卫
 router.afterEach((to, from) => {
+  const targetPath = to.path.replace(/^\//, ''); // 去掉开头 '/'
+  const idx = TABBAR_PAGES.findIndex(item =>
+    cleanPath(formatPath(item.pagePath)) == cleanPath(formatPath(targetPath))
+  );
+  if (idx >= 0) {
+    $store.dispatch('navTabBar/SetTabBarIndex', idx);
+  }
+
   const userInfo = $store.getters.userInfo;
   if (Object.keys(userInfo).length <= 0) {
     this.$store.dispatch('user/GetUserInfo');

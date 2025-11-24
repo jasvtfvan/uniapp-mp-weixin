@@ -51,16 +51,20 @@ export default {
       const username = that.username;
       const password = that.password;
       if (!username) {
-        uni.showToast({
-          title: '姓名不可为空',
-          icon: 'none',
+        uni.$emit('toastShow', {
+          type: 'error',
+          icon: false,
+          duration: 2000,
+          message: '姓名不可为空',
         });
         return false;
       }
       if (!password) {
-        uni.showToast({
-          title: '密码不可为空',
-          icon: 'none',
+        uni.$emit('toastShow', {
+          type: 'error',
+          icon: false,
+          duration: 2000,
+          message: '密码不可为空',
         });
         return false;
       }
