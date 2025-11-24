@@ -94,8 +94,11 @@ export class HttpRequest {
         conf.baseURL = BASE_API;
       }
       const { authorization, isBearerAuth } = conf.custom || {};
-      if (!conf.header || !conf.header.Accept) {
+      if (!conf.header) {
         conf.header = { Accept: 'application/json, text/plain, */*' };
+      }
+      if (!conf.header.Accept) {
+        conf.header.Accept = 'application/json, text/plain, */*';
       }
       const token = $store.getters.token;
       if (authorization && token) {
