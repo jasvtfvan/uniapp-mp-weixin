@@ -1,9 +1,9 @@
 <template>
-	<g-container :loading="loading">
-		<view class="footer">
-			<text>V{{ version }}</text>
-		</view>
-	</g-container>
+  <g-container :loading="loading">
+    <view class="footer">
+      <text>V{{ version }}</text>
+    </view>
+  </g-container>
 </template>
 
 <script>
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     // 获取微信小程序session（用于获取头像、手机号等信息）
-    code2Session(){
+    code2Session() {
       const sessionKey = this.$store.getters.sessionKey;
       if (!sessionKey) {
         // #ifdef MP-WEIXIN
@@ -136,9 +136,13 @@ export default {
         }
 
         if (uni[entry.type]) { // navigateTo redirectTo ... ...
-          uni[entry.type]({
-            url: targetPath,
-          });
+          if (entry.type == 'switchTab') {
+            this.$navigateSmoothTo(targetPath);
+          } else {
+            uni[entry.type]({
+              url: targetPath,
+            });
+          }
         } else {
           this.$navigateSmoothTo(targetPath);
         }
@@ -152,18 +156,18 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-	position: absolute;
-	bottom: 100rpx;
-	width: 100%;
-	left: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: absolute;
+  bottom: 100rpx;
+  width: 100%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	text {
-		font-size: 26rpx;
-		font-weight: 400;
-		color: #7f7f7f;
-	}
+  text {
+    font-size: 26rpx;
+    font-weight: 400;
+    color: #7f7f7f;
+  }
 }
 </style>

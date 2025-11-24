@@ -15,3 +15,6 @@ unpackage/
 *.ntvs*
 *.njsproj
 *.sln
+
+#通过pages.config.json拷贝到pages.json
+pages.json

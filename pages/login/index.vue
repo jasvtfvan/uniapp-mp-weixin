@@ -122,9 +122,13 @@ export default {
         }
 
         if (uni[entry.type]) { // navigateTo redirectTo ... ...
-          uni[entry.type]({
-            url: targetPath,
-          });
+          if (entry.type == 'switchTab') {
+            this.$navigateSmoothTo(targetPath);
+          } else {
+            uni[entry.type]({
+              url: targetPath,
+            });
+          }
         } else {
           this.$navigateSmoothTo(targetPath);
         }

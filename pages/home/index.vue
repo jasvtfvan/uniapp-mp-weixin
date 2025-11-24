@@ -56,11 +56,9 @@ export default {
   position: relative;
   font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
-  height: calc(
-    100vh - 78px - env(safe-area-inset-bottom) - 44px -
-      env(safe-area-inset-bottom)
-  );
+  height: calc(100vh - 78px - env(safe-area-inset-bottom) - 44px - env(safe-area-inset-bottom));
 }
+
 .welcome-image {
   width: 642rpx;
   height: 336rpx;
