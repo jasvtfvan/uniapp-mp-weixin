@@ -4,12 +4,8 @@ export default {
     tabBarIndex: -1,
     tabBarHeight: 0,
     navHeight: 0,
-    paperCount: 0,
   },
   mutations: {
-    SET_PAPER_COUNT: (state, count) => {
-      state.paperCount = count || 0;
-    },
     SET_TAB_BAR_INDEX: (state, index) => {
       state.tabBarIndex = index == null ? -1 : index;
     },
@@ -35,6 +31,5 @@ export default {
     tabBarIndex: state => state.tabBarIndex,
     tabBarHeight: state => state.tabBarHeight,
     navHeight: state => state.navHeight,
-    paperCount: state => state.paperCount,
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <u-navbar
-    bgColor="#1D1F22"
+    :bgColor="bgColor"
     placeholder
     :title="title"
     :titleStyle="titleStyle"
@@ -14,15 +14,23 @@
 <script>
 export default {
   props: {
+    bgColor: {
+      type: String,
+      default: '#1D1F22',
+    },
     title: {
       type: String,
-      value: '',
+      default: '',
+    },
+    titleColor: {
+      type: String,
+      default: '#FFFFFF',
     },
   },
   data() {
     return {
       titleStyle: {
-        color: '#ffffff',
+        color: this.titleColor,
       },
     };
   },

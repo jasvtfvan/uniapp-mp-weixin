@@ -8,6 +8,14 @@ const router = createRouter({
   routes: [...ROUTES],
 });
 
+if (isDev) {
+  console.log("/** ---- ROUTES: ---- */");
+  console.log(ROUTES)
+  console.log('/** ---- TABBAR_PAGES: ---- */');
+  console.log(TABBAR_PAGES);
+  console.log("/** ---- ROUTES log done ---- */");
+}
+
 //全局路由前置守卫
 router.beforeEach((to, from, next) => {
   if (isDev) {

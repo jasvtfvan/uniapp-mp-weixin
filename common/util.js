@@ -20,13 +20,25 @@ export function navigateSmoothTo(targetPath) {
   }
   const currentPath = currentPages[currentPages.length - 1].route;
   if (currentPath == targetPath) {
-    uni.showToast({
-      title: '目标为当前页面，无需跳转',
-      duration: 2000,
+    // uni.showToast({
+    //   title: '目标为当前页面，无需跳转',
+    //   duration: 2000,
+    // });
+    return;
+  }
+
+  console.warn('targetPath|=>|currentPath', targetPath, currentPath);
+
+  const isTabBar = TABBAR_PAGES.some(
+    tabPath => tabPath === targetPath.split('?')[0]
+  )
+  if (isTabBar) {
+    uni.switchTab({
+      url: `/${targetPath}`,
     });
     return;
   }
-  console.warn('targetPath|=>|currentPath', targetPath, currentPath);
+
   let delta = -1;
   for (let i = 0; i < currentPages.length; i++) {
     const pageObj = currentPages[i];

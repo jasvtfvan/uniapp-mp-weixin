@@ -1,7 +1,7 @@
 <template>
   <g-container>
     <view class="content" :style="{ height: `${height}px` }">
-      <image class="building-image" src="/static/images/common/building.png" />
+      <image class="welcome-image" src="/static/images/common/welcome.png" />
     </view>
     <g-tab-bar />
   </g-container>
@@ -13,6 +13,9 @@ export default {
     return {
       height: null,
     };
+  },
+  onShow() {
+    this.$store.dispatch('navTabBar/SetTabBarIndex', 1);
   },
   computed: {
     navHeight() {
@@ -40,7 +43,8 @@ export default {
     getContentHeight(surplusHeight) {
       const sys = this.$u.sys();
       const { screenHeight } = sys;
-      const buffer = 29; // 底部tabbar背景图和水平线之间的距离
+      // const buffer = 29; // 底部tabbar背景图和水平线之间的距离
+      const buffer = 0;
       return screenHeight - surplusHeight + buffer;
     },
   },
@@ -57,9 +61,9 @@ export default {
       env(safe-area-inset-bottom)
   );
 }
-.building-image {
-  width: 265rpx;
-  height: 441rpx;
+.welcome-image {
+  width: 642rpx;
+  height: 336rpx;
   position: absolute;
   left: 50%;
   top: 40%;

@@ -16,22 +16,16 @@
     <u-tabbar :placeholder="false" :value="index">
       <u-tabbar-item @click="clickPaper" text=" ">
         <view class="g-tabbar-item-wrap" slot="active-icon">
-          <view class="badge-wrap" v-if="showPaperCount">
-            <u-badge numberType="limit" max="99" :value="paperCount"></u-badge>
-          </view>
           <view class="g-tabbar-icon-wrap">
             <g-image-icon name="tabbar-paper-active" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-active">试卷</text>
+          <text class="g-tabbar-item-font g-tabbar-active">列表</text>
         </view>
         <view class="g-tabbar-item-wrap" slot="inactive-icon">
-          <view class="badge-wrap" v-if="showPaperCount">
-            <u-badge numberType="limit" max="99" :value="paperCount"></u-badge>
-          </view>
           <view class="g-tabbar-icon-wrap">
             <g-image-icon name="tabbar-paper-inactive" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-inactive">试卷</text>
+          <text class="g-tabbar-item-font g-tabbar-inactive">列表</text>
         </view>
       </u-tabbar-item>
       <u-tabbar-item @click="clickHome" text=" ">
@@ -39,13 +33,13 @@
           <view class="g-tabbar-icon-wrap-large">
             <g-image-icon name="tabbar-home-active" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-active">首页</text>
+          <text class="g-tabbar-item-font g-tabbar-active">拍照</text>
         </view>
         <view class="g-tabbar-item-wrap g-tabbar-home" slot="inactive-icon">
           <view class="g-tabbar-icon-wrap-large">
             <g-image-icon name="tabbar-home-inactive" />
           </view>
-          <text class="g-tabbar-item-font g-tabbar-inactive">首页</text>
+          <text class="g-tabbar-item-font g-tabbar-inactive">拍照</text>
         </view>
       </u-tabbar-item>
       <u-tabbar-item @click="clickMine" text=" ">
@@ -79,15 +73,8 @@ export default {
     tabBarIndex() {
       return this.$store.getters.tabBarIndex;
     },
-    paperCount() {
-      return this.$store.getters.paperCount || 0;
-    },
     userInfo() {
       return this.$store.getters.userInfo;
-    },
-    showPaperCount() {
-      const roles = (this.userInfo || {}).roles || [];
-      return (roles.includes(0) || roles.includes('0')) && this.paperCount;
     },
   },
   watch: {
@@ -119,23 +106,14 @@ export default {
     },
     clickPaper() {
       if (this.$store.getters.token) {
-        const userInfo = this.$store.getters.userInfo;
-        const { roles } = userInfo;
-        if (roles.length > 0) {
-          const targetPath = 'pages/paper/index';
-          this.$navigateSmoothTo(targetPath);
-        } else {
-          const targetPath = 'pages/mine/index';
-          this.$navigateSmoothTo(targetPath);
-        }
+        const targetPath = 'pages/paper/index';
+        this.$navigateSmoothTo(targetPath);
       } else {
-        uni.navigateTo({
-          url: '/pages/login/index',
-        });
+        this.$navigateSmoothTo(`/pages/index/index`);
       }
     },
     clickHome() {
-      const targetPath = 'pages/index/index';
+      const targetPath = 'pages/home/index';
       this.$navigateSmoothTo(targetPath);
     },
     clickMine() {
@@ -143,9 +121,7 @@ export default {
         const targetPath = 'pages/mine/index';
         this.$navigateSmoothTo(targetPath);
       } else {
-        uni.navigateTo({
-          url: '/pages/login/index',
-        });
+        this.$navigateSmoothTo(`/pages/index/index`);
       }
     },
   },
@@ -165,8 +141,8 @@ export default {
   }
 }
 .g-tabbar-icon-wrap {
-  width: 17px;
-  height: 17px;
+  width: 26px;
+  height: 26px;
 }
 .g-tabbar-icon-wrap-large {
   width: 44.5px;
