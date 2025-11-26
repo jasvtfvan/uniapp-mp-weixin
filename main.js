@@ -15,7 +15,7 @@ import filters from './common/filters.js';
 
 // 全局组件begin
 import GNav from '@/components/global-component/g-nav/index.vue';
-import GBackButton from '@/components/global-component/g-back-button/index.vue';
+import GBack from '@/components/global-component/g-back/index.vue';
 import GTabBar from '@/components/global-component/g-tab-bar/index.vue';
 import GImageIcon from '@/components/global-component/g-image-icon/index.vue';
 import GContainer from '@/components/global-component/g-container/index.vue';
@@ -23,6 +23,7 @@ import GContainer from '@/components/global-component/g-container/index.vue';
 
 // 全局方法
 import { navigateSmoothTo } from '@/common/util';
+import globalMixin from '@/common/mixins/global.js'
 
 Vue.config.productionTip = false;
 App.mpType = 'app';
@@ -36,7 +37,7 @@ Object.keys(filters).map(v => {
 });
 // 全局组件begin
 Vue.component('g-nav', GNav);
-Vue.component('g-back-button', GBackButton);
+Vue.component('g-back', GBack);
 Vue.component('g-tab-bar', GTabBar);
 Vue.component('g-image-icon', GImageIcon);
 Vue.component('g-container', GContainer);
@@ -47,6 +48,9 @@ Vue.component('g-container', GContainer);
 const mpShare = require('uview-ui/libs/mixin/mpShare.js');
 Vue.mixin(mpShare);
 // #endif
+
+// 全局混入
+Vue.mixin(globalMixin);
 
 Vue.prototype.$baseUrl = base_url;
 Vue.prototype.$navigateSmoothTo = navigateSmoothTo;

@@ -1,13 +1,13 @@
 <template>
   <g-container>
-    <g-nav>
+    <g-nav title="detail">
       <view slot="left">
         <view class="nav-wrap">
-          这里可以填充自定义内容
+          <g-back />
         </view>
       </view>
     </g-nav>
-    <view class="content" :style="{ height: `${mixinGlobalHeight}px` }">
+    <view class="content">
       <view class="img-wrap">
         <image class="welcome-image" src="/static/images/common/welcome.png" />
       </view>
@@ -23,8 +23,7 @@ export default {
   },
   onLoad() { },
   onShow() { },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

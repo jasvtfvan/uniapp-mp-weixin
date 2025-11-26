@@ -3,7 +3,7 @@
     <g-nav title="我的">
       <view slot="left"></view>
     </g-nav>
-    <view class="content">
+    <view class="content" :style="{ height: `${mixinGlobalHeight}px` }">
       <view class="img-wrap">
         <image class="welcome-image" src="/static/images/common/welcome.png" />
       </view>

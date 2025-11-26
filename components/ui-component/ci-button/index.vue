@@ -74,6 +74,12 @@ button {
     background: #4a4c4e;
     color: #9ebaca;
   }
+  ::v-deep text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 // 点击时样式
 .button-hover {

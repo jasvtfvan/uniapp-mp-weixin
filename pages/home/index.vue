@@ -1,49 +1,52 @@
 <template>
   <g-container>
-    <view class="content" :style="{ height: `${height}px` }">
+    <g-nav></g-nav>
+    <view class="content" :style="{ height: `${mixinGlobalHeight}px` }">
       <image class="welcome-image" src="/static/images/common/welcome.png" />
+      <view class="button-wrap">
+        <view class="button-item">
+          <ci-button @click="navToDetail">跳到详情</ci-button>
+        </view>
+        <view class="button-item">
+          <ci-button @click="openWebview">
+            <text>
+              跳到webview
+            </text>
+          </ci-button>
+        </view>
+      </view>
     </view>
     <g-tab-bar />
   </g-container>
 </template>
 
 <script>
+import CiButton from '@/components/ui-component/ci-button/index.vue';
+import { routeToOuterLink } from '@/common/util';
+
 export default {
+  components: {
+    CiButton,
+  },
   data() {
     return {
-      height: null,
     };
   },
   onShow() { },
   computed: {
-    navHeight() {
-      return this.$store.getters.navHeight || 0;
-    },
-    tabBarHeight() {
-      return this.$store.getters.tabBarHeight || 0;
-    },
-    surplusHeight() {
-      return this.navHeight + this.tabBarHeight;
+    masterLinkMap() {
+      return this.$store.getters.masterLinkMap;
     },
   },
-  watch: {
-    surplusHeight: {
-      handler(newVal, oldVal) {
-        if (newVal && newVal != oldVal) {
-          this.height = this.getContentHeight(newVal);
-        }
-      },
-      immediate: true,
-    },
-  },
+  watch: {},
   methods: {
-    // 高度
-    getContentHeight(surplusHeight) {
-      const sys = this.$u.sys();
-      const { screenHeight } = sys;
-      // const buffer = 29; // 底部tabbar背景图和水平线之间的距离
-      const buffer = 0;
-      return screenHeight - surplusHeight + buffer;
+    navToDetail() {
+      this.$navigateSmoothTo(`/pages/detail/index`);
+    },
+    openWebview() {
+      if (this.masterLinkMap.baidu) {
+        routeToOuterLink(this.masterLinkMap.baidu);
+      }
     },
   },
 };
@@ -51,10 +54,10 @@ export default {
 
 <style lang="scss" scoped>
 .content {
+  padding: 1px;
   position: relative;
   font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
-  height: calc(100vh - 78px - env(safe-area-inset-bottom) - 44px - env(safe-area-inset-bottom));
 }
 
 .welcome-image {
@@ -64,5 +67,12 @@ export default {
   left: 50%;
   top: 40%;
   transform: translate(-50%, -50%);
+}
+
+.button-wrap {
+  margin-top: 20px;
+  .button-item {
+    margin: 20rpx 0rpx;
+  }
 }
 </style>

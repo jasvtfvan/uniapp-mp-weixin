@@ -16,7 +16,7 @@ export default {
   props: {
     bgColor: {
       type: String,
-      default: '#1D1F22',
+      default: 'transparent',
     },
     title: {
       type: String,
@@ -24,7 +24,7 @@ export default {
     },
     titleColor: {
       type: String,
-      default: '#FFFFFF',
+      default: '#000000',
     },
   },
   data() {
