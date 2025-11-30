@@ -17,6 +17,7 @@ import filters from './common/filters.js';
 import GNav from '@/components/global-component/g-nav/index.vue';
 import GBack from '@/components/global-component/g-back/index.vue';
 import GTabBar from '@/components/global-component/g-tab-bar/index.vue';
+import GSvgIcon from '@/components/global-component/g-svg-icon/index.vue';
 import GImageIcon from '@/components/global-component/g-image-icon/index.vue';
 import GContainer from '@/components/global-component/g-container/index.vue';
 // 全局组件end
@@ -39,6 +40,7 @@ Object.keys(filters).map(v => {
 Vue.component('g-nav', GNav);
 Vue.component('g-back', GBack);
 Vue.component('g-tab-bar', GTabBar);
+Vue.component('g-svg-icon', GSvgIcon);
 Vue.component('g-image-icon', GImageIcon);
 Vue.component('g-container', GContainer);
 // 全局组件end

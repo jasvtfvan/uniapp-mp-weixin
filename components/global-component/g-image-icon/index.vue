@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     src() {
-      return require(`@/static/icons/icon-${this.name}.png`);
+      return require(`@/static/icons/image/icon-${this.name}.png`);
     },
   },
 };

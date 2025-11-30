@@ -18,6 +18,7 @@
 page {
 	width: 100%;
 	height: 100%;
+  // background: #000000; // 全屏背景图，防止 safe-area-inset-bottom 变白
 }
 
 .u-block {

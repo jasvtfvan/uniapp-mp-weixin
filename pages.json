@@ -69,21 +69,21 @@
     "list": [
       {
         "pagePath": "pages/paper/index",
-        "iconPath": "static/icons/icon-tabbar-paper-inactive.png",
-        "selectedIconPath": "static/icons/icon-tabbar-paper-active.png",
+        "iconPath": "static/icons/image/icon-tabbar-paper-inactive.png",
+        "selectedIconPath": "static/icons/image/icon-tabbar-paper-active.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/home/index",
-        "iconPath": "static/icons/icon-tabbar-home-inactive.png",
-        "selectedIconPath": "static/icons/icon-tabbar-home-active.png",
+        "iconPath": "static/icons/image/icon-tabbar-home-inactive.png",
+        "selectedIconPath": "static/icons/image/icon-tabbar-home-active.png",
         "text": "拍照",
         "large": true
       },
       {
         "pagePath": "pages/mine/index",
-        "iconPath": "static/icons/icon-tabbar-mine-inactive.png",
-        "selectedIconPath": "static/icons/icon-tabbar-mine-active.png",
+        "iconPath": "static/icons/image/icon-tabbar-mine-inactive.png",
+        "selectedIconPath": "static/icons/image/icon-tabbar-mine-active.png",
         "text": "我的"
       }
     ]

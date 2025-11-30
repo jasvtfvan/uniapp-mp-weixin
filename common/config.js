@@ -1,27 +1,31 @@
+/** -------- 基础信息（可修改） 开始 -------- */
+let base_url = 'https://example.daily.com/';
+let version = '1.0.0';
+let isProd = false; // H5打包时需要修改，小程序无需修改
+/** -------- 基础信息（可修改） 结束 -------- */
+
 const systemInfo = uni.getSystemInfoSync();
-const isDev = (systemInfo.platform && systemInfo.platform == 'devtools');
 
-let base_url = ""
+/** -------- 环境信息（不可修改） 开始 -------- */
+const isDev = process.env.NODE_ENV == 'development';
+const isMpWeiXin = systemInfo.uniPlatform === 'mp-weixin';
+/** -------- 环境信息（不可修改） 结束 -------- */
 
-let isWxDev = false;
-if (__wxConfig) { // 微信小程序
-  const envVersion = __wxConfig.envVersion;
-  if (envVersion != 'release') {
-    // ------开发环境--------
-    base_url = 'https://xxx.uat.daily.com/';
-    isWxDev = true;
-  } else {
-    // ------生产环境--------
-    base_url = 'https://xxx.daily.com/';
-    isWxDev = false;
+if (isMpWeiXin) {
+  if (__wxConfig) {
+    const envVersion = __wxConfig.envVersion;
+    if (envVersion == 'release') {
+      isProd = true;
+    } else {
+      isProd = false;
+    }
   }
 }
 
-const version = '1.0.0';
-
 export default base_url;
 export {
-  isDev,
-  isWxDev as isUAT,
   version,
+  isProd,
+  isDev,
+  isMpWeiXin,
 };

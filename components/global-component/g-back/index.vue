@@ -1,6 +1,6 @@
 <template>
   <view class="icon-wrap" @click="goBack">
-    <g-image-icon :name="`arrow-back${number}`" />
+    <g-svg-icon name="arrow-back" color="#FF3C3c" />
   </view>
 </template>
 
@@ -10,19 +10,6 @@ export default {
     path: {
       type: String,
       default: '',
-    },
-    themeNumber: {
-      type: Number,
-      default: 5,
-    },
-  },
-  computed: {
-    number() {
-      if (!this.themeNumber || ![1,2,3,4,5].includes(this.themeNumber)){
-        return 1;
-      } else {
-        return this.themeNumber;
-      }
     },
   },
   methods: {
