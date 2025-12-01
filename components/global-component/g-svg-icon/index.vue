@@ -69,7 +69,10 @@ export default {
         /(fill|stroke)="#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?([0-9a-fA-F]{2})?"/g,
         `$1="${this.color}"`
       );
-      this.svgData = 'data:image/svg+xml;base64,' + uni.arrayBufferToBase64(new TextEncoder().encode(svg))
+      const arrayBuffer = new Uint8Array(
+        [].map.call(svg, c => c.charCodeAt(0))
+      ).buffer;
+      this.svgData = 'data:image/svg+xml;base64,' + uni.arrayBufferToBase64(arrayBuffer);
     },
   },
 };
