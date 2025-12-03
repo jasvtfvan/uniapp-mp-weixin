@@ -28,10 +28,10 @@ export default {
   methods: {
     mixinGlobalGetContentHeight(surplusHeight) {
       const sys = uni.getSystemInfoSync();
-      const { screenHeight } = sys;
+      const { windowHeight } = sys;
       // const buffer = 29; // 底部tabbar背景图和水平线之间的距离
       const buffer = 0;
-      return screenHeight - surplusHeight + buffer;
+      return windowHeight - surplusHeight + buffer;
     },
   },
 }
