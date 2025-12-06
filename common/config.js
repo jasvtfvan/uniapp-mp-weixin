@@ -7,8 +7,13 @@ let isProd = false; // H5打包时需要修改，小程序无需修改
 const systemInfo = uni.getSystemInfoSync();
 
 /** -------- 环境信息（不可修改） 开始 -------- */
-const isDev = process.env.NODE_ENV == 'development';
 const isMpWeiXin = systemInfo.uniPlatform === 'mp-weixin';
+let isDev = false;
+if (isMpWeiXin) {
+  isDev = (systemInfo.platform && systemInfo.platform == 'devtools');
+} else {
+  isDev = process.env.NODE_ENV == 'development';
+}
 /** -------- 环境信息（不可修改） 结束 -------- */
 
 if (isMpWeiXin) {
