@@ -8,6 +8,7 @@
     :refresher-enabled="refresherEnabled"
     :refresher-triggered="refresherTriggered"
     :style="{
+      height,
       backgroundColor,
       borderTop: borderTopColor ? `2rpx solid ${borderTopColor}` : 'none',
     }"
@@ -73,6 +74,7 @@ export default {
   },
   data() {
     return {
+      height: '100vh',
       refresherTriggered: false,
       _freshing: false,
     };
@@ -96,7 +98,11 @@ export default {
       immediate: true,
     },
   },
-  mounted() {},
+  mounted() {
+    const sys = uni.getSystemInfoSync();
+    const { windowHeight } = sys;
+    this.height = `${windowHeight}px`;
+  },
   destroyed() {},
   methods: {
     // 下拉刷新被中止
@@ -134,7 +140,7 @@ export default {
 <style lang="scss" scoped>
 .g-container {
   width: 750rpx;
-  height: 100%;
+  height: 100vh;
   position: relative;
   .loading-wrap {
     position: absolute;
